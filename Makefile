@@ -19,7 +19,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = get_next_line.c get_next_line_utils.c error.c map_utils.c so_long.c check_map.c valid_path.c parse_map.c\
+SRC = utils/get_next_line.c utils/get_next_line_utils.c error.c utils/map_utils.c so_long.c check_map.c valid_path.c parse_map.c\
 playing.c moving.c animation.c
 
 OBJ = $(SRC:.c=.o)
@@ -27,18 +27,18 @@ OBJ = $(SRC:.c=.o)
 all : $(LIB_LIBFT) $(LIB_PRINTF) $(NAME)
 
 $(LIB_LIBFT) :
-	$(MAKE) -C libft/
+	$(MAKE) -C utils/libft/
 
 $(LIB_PRINTF) :
-	$(MAKE) -C ft_printf/
-	
+	$(MAKE) -C utils/ft_printf/
+
 $(NAME) : $(OBJ) so_long.h
 	$(CC) $(CFLAGS) $(LIB_PRINTF) $(LIB_LIBFT) $(OBJ) -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGl -framework Appkit -o $@
 
 %.o : %.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
-clean : 
+clean :
 	$(MAKE) clean -C ft_printf/
 	$(MAKE) clean -C libft/
 	rm -rf *.o
